@@ -1,24 +1,25 @@
 import lib as protocol
-import random
 
 if __name__ == "__main__":
     n = 22
     g = 42
-    x = random.random()
-    initKey = (g ** x) % n
+    # x = random.random()
+    # initKey = (g**x) % n
+
     server_handler = protocol.server_socket("localhost", 50)
 
-    # waiting for connections
+    # listening for connections
     protocol.receive(server_handler)
+    # computedKey = (float(protocol.receive(proto_handler))**x) % n
 
-    protocol.send(server_handler, str(initKey))
-    computedKey = (float(protocol.receive(server_handler)) ** x) % n
+    value = 'first message'
+    print(value)
 
-    value = float("do the lab")+computedKey
-    print(str(value))
-    protocol.send(server_handler, str(value))
-    value_1 = protocol.receive(server_handler)-computedKey
-    value_2 = str(value_1) + ' - server no, you!'
-    protocol.send(server_handler, str(float(value_2)+computedKey))
-    value_3 = protocol.receive(server_handler)
-    print(str(value_3))
+    protocol.send(server_handler, value)
+    value = protocol.receive(server_handler)
+    print(value)
+
+    value = ' third message'
+    protocol.send(server_handler, value)
+    val_new = protocol.receive(server_handler)
+    print(val_new)

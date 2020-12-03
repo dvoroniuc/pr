@@ -59,8 +59,7 @@ def receive(sock):
     while True:
         data, address = sock.sock.recvfrom(BUFF_SIZE)
         packet = json.loads(data.decode('utf-8'))
-        print("packet receive")
-        print(packet)
+        print("packet received")
 
         if is_valid(packet):
             sock.sock.sendto(make_packet('ack'), address)
